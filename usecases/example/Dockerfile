@@ -17,5 +17,4 @@
 
 # Date: 2016-09-15
 
-FROM chalmersrevere/scaledcars-on-opendlv-core-on-opendavinci-ubuntu-16.04-complete:latest
-
+FROM seresearch/scaledcars-on-opendlv-core-on-opendavinci-ubuntu-16.04-complete:latest
