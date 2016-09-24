@@ -18,6 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 BUILD_AS=$1
+UID_AS=$2
 
 # Adding user for building.
 groupadd $BUILD_AS
@@ -39,5 +40,5 @@ chmod 755 /opt/opendlv.scaledcars.build/build.sh
 chown $BUILD_AS:$BUILD_AS /opt/opendlv.scaledcars.build/build.sh
 chown -R $BUILD_AS:$BUILD_AS /opt
 
-su -m `getent passwd 1000|cut -f1 -d":"` -c /opt/opendlv.scaledcars.build/build.sh
+su -m `getent passwd $UID_AS|cut -f1 -d":"` -c /opt/opendlv.scaledcars.build/build.sh
 
