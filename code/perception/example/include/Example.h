@@ -17,21 +17,26 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef CONTROL_EXAMPLE_H
-#define CONTROL_EXAMPLE_H
+#ifndef PERCEPTION_EXAMPLE_H
+#define PERCEPTION_EXAMPLE_H
 
-#include <opendavinci/odcore/base/module/TimeTriggeredConferenceClientModule.h>
+#include <memory>
+
+#include <opencv/cv.h>
+
+#include <opendavinci/odcore/base/module/DataTriggeredConferenceClientModule.h>
 #include <opendavinci/odcore/data/Container.h>
+#include <opendavinci/odcore/wrapper/SharedMemory.h>
 
 namespace scaledcars {
-namespace control {
+namespace perception {
 
 using namespace std;
 
 /**
  * Time-triggered example.
  */
-class Example : public odcore::base::module::TimeTriggeredConferenceClientModule {
+class Example : public odcore::base::module::DataTriggeredConferenceClientModule {
    private:
     Example(const Example & /*obj*/) = delete;
     Example &operator=(const Example & /*obj*/) = delete;
@@ -52,9 +57,17 @@ class Example : public odcore::base::module::TimeTriggeredConferenceClientModule
    private:
     void setUp();
     void tearDown();
-    odcore::data::dmcp::ModuleExitCodeMessage::ModuleExitCode body();
+
+   private:
+    void processImage();
+
+   private:
+    bool m_hasAttachedToSharedImageMemory;
+    std::shared_ptr<odcore::wrapper::SharedMemory> m_sharedImageMemory;
+
+    IplImage *m_image;
 };
 }
-} // scaledcars::control
+} // scaledcars::perception
 
-#endif /*CONTROL_EXAMPLE_H*/
+#endif /*PERCEPTION_EXAMPLE_H*/

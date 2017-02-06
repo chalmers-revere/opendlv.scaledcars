@@ -28,7 +28,7 @@
 using namespace std;
 using namespace scaledcars::control;
 
-class ExampleTest : public CxxTest::TestSuite {
+class ExampleControlTest : public CxxTest::TestSuite {
    public:
     void setUp() {}
 

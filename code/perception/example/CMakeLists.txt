@@ -17,7 +17,7 @@
 
 CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
 
-PROJECT (scaledcars-control-example)
+PROJECT (scaledcars-perception-example)
 
 ###########################################################################
 # Set the search path for .cmake files.
@@ -120,5 +120,5 @@ INSTALL(TARGETS ${PROJECT_NAME}-static DESTINATION lib COMPONENT scaledcars-soft
 INSTALL(FILES man/${PROJECT_NAME}.1 DESTINATION man/man1 COMPONENT scaledcars-software)
 
 # Install header files.
-INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/" DESTINATION include/scaledcars-control-example COMPONENT scaledcars-software)
+INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/" DESTINATION include/scaledcars-perception-example COMPONENT scaledcars-software)
 
