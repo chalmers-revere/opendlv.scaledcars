@@ -35,7 +35,7 @@ using namespace odcore::base;
 using namespace odcore::data;
 
 Example::Example(const int &argc, char **argv)
-    : TimeTriggeredConferenceClientModule(argc, argv, "scaledcars-example") {}
+    : TimeTriggeredConferenceClientModule(argc, argv, "scaledcars-control-example") {}
 
 Example::~Example() {}
 

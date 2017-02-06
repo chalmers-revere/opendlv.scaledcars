@@ -17,26 +17,36 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef SCALEDCARS_CONTROL_EXAMPLE_TESTSUITE_H
-#define SCALEDCARS_CONTROL_EXAMPLE_TESTSUITE_H
+#include <stdint.h>
 
-#include "cxxtest/TestSuite.h"
+#include <iostream>
 
-// Include local header files.
-#include "../include/Example.h"
+#include <automotivedata/GeneratedHeaders_AutomotiveData.h>
+
+#include "odvdscaledcarsdatamodel/generated/chalmersrevere/scaledcars/ExampleMessage.h"
+
+#include "Example.h"
+
+namespace scaledcars {
+namespace perception {
 
 using namespace std;
-using namespace scaledcars::control;
+using namespace odcore::base;
+using namespace odcore::data;
 
-class ExampleTest : public CxxTest::TestSuite {
-   public:
-    void setUp() {}
+Example::Example(const int &argc, char **argv)
+    : DataTriggeredConferenceClientModule(argc, argv, "scaledcars-perception-example") {}
 
-    void tearDown() {}
+Example::~Example() {}
 
-    void testApplication() {
-        TS_ASSERT(true);
-    }
-};
+void Example::setUp() {}
 
-#endif /*SCALEDCARS_CONTROL_EXAMPLE_TESTSUITE_H*/
+void Example::tearDown() {}
+
+void Example::nextContainer(odcore::data::Container &c) {
+    // Example on how to receive Containers.
+    cout << "Received Container of type = " << c.getDataType() << endl;
+}
+
+}
+} // scaledcars::perception
