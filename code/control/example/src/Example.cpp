@@ -21,7 +21,6 @@
 
 #include <iostream>
 
-#include <opendavinci/odcore/data/Container.h>
 #include <automotivedata/GeneratedHeaders_AutomotiveData.h>
 
 #include "odvdscaledcarsdatamodel/generated/chalmersrevere/scaledcars/ExampleMessage.h"
@@ -44,7 +43,13 @@ void Example::setUp() {}
 
 void Example::tearDown() {}
 
+void Example::nextContainer(odcore::data::Container &c) {
+    // Example on how to receive Containers.
+    cout << "Received Container of type = " << c.getDataType() << endl;
+}
+
 odcore::data::dmcp::ModuleExitCodeMessage::ModuleExitCode Example::body() {
+    // Example on how to use self-defined data structures.
     chalmersrevere::scaledcars::ExampleMessage em;
     cout << em.toString() << endl;
     em.setField1(1234);
@@ -52,6 +57,8 @@ odcore::data::dmcp::ModuleExitCodeMessage::ModuleExitCode Example::body() {
 
     while (getModuleStateAndWaitForRemainingTimeInTimeslice() == odcore::data::dmcp::ModuleStateMessage::RUNNING) {
         cout << "Inside the main processing loop." << endl;
+
+        // Example how to send commands to the vehicle.
         automotive::VehicleControl vc;
         vc.setSpeed(2);
         vc.setSteeringWheelAngle(5 * cartesian::Constants::DEG2RAD);

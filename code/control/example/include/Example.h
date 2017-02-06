@@ -21,6 +21,7 @@
 #define CONTROL_EXAMPLE_H
 
 #include <opendavinci/odcore/base/module/TimeTriggeredConferenceClientModule.h>
+#include <opendavinci/odcore/data/Container.h>
 
 namespace scaledcars {
 namespace control {
@@ -45,6 +46,8 @@ class Example : public odcore::base::module::TimeTriggeredConferenceClientModule
     Example(const int &argc, char **argv);
 
     virtual ~Example();
+
+    virtual void nextContainer(odcore::data::Container &c);
 
    private:
     void setUp();
