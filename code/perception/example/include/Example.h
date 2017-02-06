@@ -20,8 +20,13 @@
 #ifndef PERCEPTION_EXAMPLE_H
 #define PERCEPTION_EXAMPLE_H
 
+#include <memory>
+
+#include <opencv/cv.h>
+
 #include <opendavinci/odcore/base/module/DataTriggeredConferenceClientModule.h>
 #include <opendavinci/odcore/data/Container.h>
+#include <opendavinci/odcore/wrapper/SharedMemory.h>
 
 namespace scaledcars {
 namespace perception {
@@ -52,6 +57,15 @@ class Example : public odcore::base::module::DataTriggeredConferenceClientModule
    private:
     void setUp();
     void tearDown();
+
+   private:
+    void processImage();
+
+   private:
+    bool m_hasAttachedToSharedImageMemory;
+    std::shared_ptr<odcore::wrapper::SharedMemory> m_sharedImageMemory;
+
+    IplImage *m_image;
 };
 }
 } // scaledcars::perception
