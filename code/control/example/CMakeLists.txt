@@ -45,6 +45,10 @@ INCLUDE (CheckCxxTestEnvironment)
 FIND_PACKAGE (OpenDaVINCI REQUIRED)
 
 ###########################################################################
+# Find AutomotiveData.
+FIND_PACKAGE (AutomotiveData REQUIRED)
+
+###########################################################################
 # Find ODVDScaledCarsDataModel.
 find_package(ODVDScaledCarsDataModel REQUIRED)
 
@@ -53,11 +57,14 @@ find_package(ODVDScaledCarsDataModel REQUIRED)
 INCLUDE_DIRECTORIES (SYSTEM ${ODVDSCALEDCARSDATAMODEL_INCLUDE_DIRS})
 # Set header files from OpenDaVINCI.
 INCLUDE_DIRECTORIES (SYSTEM ${OPENDAVINCI_INCLUDE_DIRS})
+# Set header files from AutomotiveData.
+INCLUDE_DIRECTORIES (SYSTEM ${AUTOMOTIVEDATA_INCLUDE_DIRS})
 # Set include directory.
 INCLUDE_DIRECTORIES(include)
 
 # Set libraries to link against.
 set(LIBRARIES ${OPENDAVINCI_LIBRARIES}
+              ${AUTOMOTIVEDATA_LIBRARIES}
               ${ODVDSCALEDCARSDATAMODEL_LIBRARIES})
 
 ###############################################################################

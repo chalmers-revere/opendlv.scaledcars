@@ -21,6 +21,9 @@
 
 #include <iostream>
 
+#include <opendavinci/odcore/data/Container.h>
+#include <automotivedata/GeneratedHeaders_AutomotiveData.h>
+
 #include "odvdscaledcarsdatamodel/generated/chalmersrevere/scaledcars/ExampleMessage.h"
 
 #include "Example.h"
@@ -30,9 +33,10 @@ namespace control {
 
 using namespace std;
 using namespace odcore::base;
+using namespace odcore::data;
 
 Example::Example(const int &argc, char **argv)
-    : TimeTriggeredConferenceClientModule(argc, argv, "copplar-example") {}
+    : TimeTriggeredConferenceClientModule(argc, argv, "scaledcars-example") {}
 
 Example::~Example() {}
 
@@ -48,6 +52,11 @@ odcore::data::dmcp::ModuleExitCodeMessage::ModuleExitCode Example::body() {
 
     while (getModuleStateAndWaitForRemainingTimeInTimeslice() == odcore::data::dmcp::ModuleStateMessage::RUNNING) {
         cout << "Inside the main processing loop." << endl;
+        automotive::VehicleControl vc;
+        vc.setSpeed(2);
+        vc.setSteeringWheelAngle(5 * cartesian::Constants::DEG2RAD);
+        Container c(vc);
+        getConference().send(c);
     }
 
     return odcore::data::dmcp::ModuleExitCodeMessage::OKAY;
