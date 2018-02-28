@@ -6,6 +6,8 @@
 #include <fstream>
 #include <cstdint>
 #include <assert.h>
+#include <chrono>
+#include <thread>
 
 int main (int argc, char *argv[]) 
 {
@@ -18,7 +20,8 @@ int main (int argc, char *argv[])
     unsigned long device_addr = std::strtol(argv[2], &end, 0);
     uint8_t command = 0x00;
     unsigned long new_addr = std::strtol(argv[3], &end, 0);
-    
+    const int delay = 100;
+
     char filename[20];
     snprintf(filename, sizeof(filename), "/dev/i2c-%d", bus);
     filename[sizeof(filename) - 1] = '\0';
@@ -46,16 +49,19 @@ int main (int argc, char *argv[])
         return -1;
     }
     buffer[1] = 0xAA;
+    std::this_thread::sleep_for(std::chrono::milliseconds(delay));
     if (write(file, buffer, 2) != 2) {
         std::cout << "Failed to send 0xAA to device." << std::endl;
         return -1;
     }
     buffer[1] = 0xA5;
+    std::this_thread::sleep_for(std::chrono::milliseconds(delay));
     if (write(file, buffer, 2) != 2) {
         std::cout << "Failed to send 0xA5 to device." << std::endl;
         return -1;
     }
     buffer[1] = new_addr;
+    std::this_thread::sleep_for(std::chrono::milliseconds(delay));
     if (write(file, buffer, 2) != 2) {
         std::cout << "Failed to change addr." << std::endl;
         return -1;
