@@ -12,7 +12,7 @@
 int main (int argc, char *argv[]) 
 {
     if (argc != 4) {
-        std::cout << "Invalid number of arguments. " << argc << std::cout;
+        std::cout << "Invalid number of arguments. " << argc << std::endl;
         return -1;
     }
     char *end;
@@ -29,7 +29,7 @@ int main (int argc, char *argv[])
     new_addr = new_addr << 1;
     
     if (new_addr < 0xE0 || new_addr > 0xEE) {
-        std::cout << "Unsupported new address." << std::cout;
+        std::cout << "Unsupported new address." << std::endl;
         return -1;
     }
     int file = open(filename, O_RDWR);
